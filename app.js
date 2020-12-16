@@ -6,6 +6,7 @@ var logger = require('morgan');
 require('./config/settings')
 var indexRouter = require('./routes/index');
 const courseRouter = require('./routes/courses')
+const modulesRouter = require('./routes/modules')
 var app = express();
 
 app.use(logger('dev'));
@@ -16,6 +17,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.use('/', indexRouter);
-app.use('/api/',courseRouter);
+app.use('/api/course',courseRouter);
+app.use('/api/module',modulesRouter);
 
 module.exports = app;

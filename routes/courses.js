@@ -75,4 +75,16 @@ router.put('/:course_id',(req,res)=>{
         return res.json({result})
     })
 })
+
+router.delete('/:course_id',(req,res)=>{
+    const course_id = parseInt(req.params.course_id);
+    const query = "DELETE FROM courses WHERE course_id = "+course_id;  
+    pool.query(query,(err,result)=>{
+        if(err){
+            return res.json({err})
+        }
+        const data = result.rows[0];
+        return res.json({course:data});
+    })
+})
 module.exports = router;
