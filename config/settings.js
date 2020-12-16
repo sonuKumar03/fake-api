@@ -1,6 +1,4 @@
 const Pool = require('pg').Pool
-
-
 const pool = new Pool({
   user: process.env.user,
   host: process.env.host,
@@ -8,12 +6,4 @@ const pool = new Pool({
   password: process.env.password,
   port: process.env.port,
 })
-
-
-pool.connect().then(()=>{
-  console.log("connected");
-}).catch(err=>{
-  console.log(err);
-})
-
 module.exports = pool;
