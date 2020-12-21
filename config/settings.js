@@ -6,8 +6,8 @@ const pool = new Pool({
   password: process.env.password,
   port: process.env.port,
 })
-
 pool.connect().then(()=>{
   console.log("connectd");
 }).catch(err=>{ console.log(err); })
+
 module.exports = pool;

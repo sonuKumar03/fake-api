@@ -10,7 +10,6 @@ router.get('/', function(req, res) {
         const courses = result.rows;
         return res.json({courses})
     }).catch(err=>{
-        console.log(err);
         return res.json({err})
     })
 });
@@ -62,6 +61,7 @@ router.post('/',(req,res)=>{
 
 router.put('/:course_id',(req,res)=>{
     const course_id = req.params.course_id;
+
     const body = req.body;
     // let query="INSERT INTO courses()VALUES (?, ?, ?, ?, ?)"
     let query=" UPDATE courses SET "
@@ -91,6 +91,7 @@ router.delete('/:course_id',(req,res)=>{
         values:[course_id]
     }
     pool.query(query_string,(err,result)=>{
+
         if(err){
             return res.json({err})
         }

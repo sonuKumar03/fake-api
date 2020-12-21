@@ -35,7 +35,6 @@ router.get("/:module_id", function (req, res) {
 
 router.post('/',(req,res)=>{
     const body = req.body;
-    // let query="INSERT INTO modules()VALUES (?, ?, ?, ?, ?)"
     let query="INSERT INTO modules("
     let columns  = [...Object.keys(body.module)].map(col=>col).join(",");
     query+=columns;
@@ -61,14 +60,12 @@ router.post('/',(req,res)=>{
 router.put('/:module_id',(req,res)=>{
     const module_id = req.params.module_id;
     const body = req.body;
-    // let query="INSERT INTO modules()VALUES (?, ?, ?, ?, ?)"
     let query=" UPDATE modules SET "
     let columns  = [...Object.keys(body.module)].map((col,i)=>col+"="+"$"+(i+1)).join(",");
     query+=columns;
     query+=" WHERE module_id=$"+(Object.keys(body.module).length+1);
     const values =  [...Object.values(body.module)].map(item=>item);
     values.push(module_id);
-
     const query_string = {
         text:query,
         values:values
@@ -89,6 +86,7 @@ router.delete('/:module_id',(req,res)=>{
         values:[module_id]
     }
     pool.query(query_string,(err,result)=>{
+
         if(err){
             return res.json({err})
         }
